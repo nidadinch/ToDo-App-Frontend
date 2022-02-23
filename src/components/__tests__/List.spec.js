@@ -18,5 +18,13 @@ describe('List.vue', function () {
             const item = wrapper.find('.todo-list-item')
             expect(item.exists()).toBeTruthy()
         })
+        it('should render input', () => {
+            const input = wrapper.find('#input')
+            expect(input.exists()).toBeTruthy()
+        })
+        it('should render add button', () => {
+            const button = wrapper.find('.add-button')
+            expect(button.exists()).toBeTruthy()
+        })
     })
 });
