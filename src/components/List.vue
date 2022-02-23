@@ -1,5 +1,7 @@
 <template>
   <div>
+    <input id="input" name="textbox">
+    <button class="add-button" @click="">Add</button>
     <ul class="todo-list">
       <li class="todo-list-item"
            v-for="item in items"
