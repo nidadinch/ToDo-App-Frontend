@@ -14,5 +14,9 @@ describe('List.vue', function () {
             const container = wrapper.find('.todo-list')
             expect(container.exists()).toBeTruthy()
         })
+        it('should render todo-list item', () => {
+            const item = wrapper.find('.todo-list-item')
+            expect(item.exists()).toBeTruthy()
+        })
     })
 });
