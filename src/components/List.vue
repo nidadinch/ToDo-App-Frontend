@@ -1,7 +1,7 @@
 <template>
   <div>
     <input id="input" name="textbox">
-    <button class="add-button" @click="">Add</button>
+    <button class="add-button" id="addButton" @click="addToList()">Add</button>
     <ul class="todo-list">
       <li class="todo-list-item"
            v-for="item in items"
@@ -22,6 +22,9 @@ export default {
   async mounted() {
   },
   methods:{
+    addToList(){
+
+    }
   }
 }
 </script>
