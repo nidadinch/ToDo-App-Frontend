@@ -1,4 +1,4 @@
-import {shallowMount} from "@vue/test-utils";
+import {mount, shallowMount} from "@vue/test-utils";
 import List from "@/components/List";
 
 describe('List.vue', function () {
@@ -14,10 +14,6 @@ describe('List.vue', function () {
             const container = wrapper.find('.todo-list')
             expect(container.exists()).toBeTruthy()
         })
-        it('should render todo-list item', () => {
-            const item = wrapper.find('.todo-list-item')
-            expect(item.exists()).toBeTruthy()
-        })
         it('should render input', () => {
             const input = wrapper.find('#input')
             expect(input.exists()).toBeTruthy()
@@ -26,5 +22,19 @@ describe('List.vue', function () {
             const button = wrapper.find('.add-button')
             expect(button.exists()).toBeTruthy()
         })
+
+    })
+
+    describe("functionality check", () => {
+        it('add button click functionality ', async function () {
+            const addToListSpy = jest.spyOn(List.methods, 'addToList')
+            const wrapper = mount(List)
+            const button = wrapper.find("#addButton")
+            await button.trigger('click')
+            expect(addToListSpy).toBeCalled()
+
+        });
     })
 });
+
+
