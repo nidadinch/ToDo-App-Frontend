@@ -1,5 +1,9 @@
-import {mount, shallowMount} from "@vue/test-utils";
+import {shallowMount} from "@vue/test-utils";
 import List from "@/components/List";
+import API from "@/api";
+import flushPromises from "flush-promises";
+
+jest.mock("@/api")
 
 describe('List.vue', function () {
     describe('Exists check',  () => {
@@ -26,14 +30,37 @@ describe('List.vue', function () {
     })
 
     describe("functionality check", () => {
-        it('add button click functionality ', async function () {
+        it('add button click functionality ', async () => {
             const addToListSpy = jest.spyOn(List.methods, 'addToList')
-            const wrapper = mount(List)
+            const wrapper = shallowMount(List)
             const button = wrapper.find("#addButton")
             await button.trigger('click')
             expect(addToListSpy).toBeCalled()
 
         });
+
+        it('should render todo list items correctly', async () => {
+            const mockResponse = [
+                {
+                    "id": 1,
+                    "text": "buy some cheese"
+                },
+                {
+                    "id": 2,
+                    "text": "go to gym"
+                },
+                {
+                    "id": 3,
+                    "text": "practice go"
+                }
+            ]
+            API.getItemList.mockResolvedValue(mockResponse)
+            const wrapper = shallowMount(List)
+            await flushPromises()
+            const todoItem = wrapper.findAll('li')
+            expect(todoItem).toHaveLength(mockResponse.length)
+        })
+
     })
 });
 

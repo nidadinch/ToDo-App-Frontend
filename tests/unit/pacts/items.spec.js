@@ -23,7 +23,7 @@ pactWith({
                 willRespondWith: {
                     status: 200,
                     headers: {
-                        'Content-Typ': 'application/json; charset=UTF-8',
+                        'Content-Type': 'application/json; charset=UTF-8',
                     },
                     body: {
                         data: eachLike({
