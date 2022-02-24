@@ -24,5 +24,9 @@ export class API {
     async getItemList() {
         return axios.get(this.withPath('/items')).then(r => r.data)
     }
+
+    async addTodoItem(item) {
+        return axios.post(this.withPath('/item', item)).then(r => r.data)
+    }
 }
 export default new API(process.env.VUE_APP_BASE_API_URL);

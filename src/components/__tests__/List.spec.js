@@ -36,7 +36,6 @@ describe('List.vue', function () {
             const button = wrapper.find("#addButton")
             await button.trigger('click')
             expect(addToListSpy).toBeCalled()
-
         });
 
         it('should render todo list items correctly', async () => {

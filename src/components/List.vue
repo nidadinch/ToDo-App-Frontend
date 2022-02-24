@@ -1,11 +1,11 @@
 <template>
   <div>
-    <input id="input" name="textbox">
-    <button className="add-button" id="addButton" @click="addToList()">Add</button>
-    <ul className="todo-list">
-      <li className="todo-list-item"
+    <input id="input" name="textbox" v-model:value="newToDo">
+    <button class="add-button" id="addButton" @click="addToList()">Add</button>
+    <ul class="todo-list">
+      <li class="todo-list-item"
           v-for="item in items"
-      >{{ it em }}
+      >{{ item }}
       </li>
     </ul>
   </div>
@@ -20,6 +20,7 @@ export default {
   data() {
     return {
       items: [],
+      newToDo: ''
     }
   },
   async created() {
@@ -32,8 +33,8 @@ export default {
   async mounted() {
   },
   methods: {
-    addToList() {
-      
+    async addToList() {
+      await API.addTodoItem(this.newToDo)
     }
   }
 }
