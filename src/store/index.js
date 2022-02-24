@@ -21,11 +21,9 @@ export default new Vuex.Store({
     },
     actions: {
         async getTodos({commit}) {
-            const data = await API.getItemList()
-            console.log('data', data)
-            for (const item of data){
-                commit("addTodo", item)
-            }
+            await API.getItemList().then((todos) => {
+                commit("setTodos", todos)
+            })
         },
         async addTodo({commit}, todoItem) {
             await API.addTodoItem(todoItem).then(() => {
