@@ -1,16 +1,19 @@
-import {shallowMount} from "@vue/test-utils";
+import {createLocalVue, mount} from "@vue/test-utils";
 import List from "@/components/List";
 import API from "@/api";
 import flushPromises from "flush-promises";
+import Vuex from 'vuex';
 
 jest.mock("@/api")
 
 describe('List.vue', function () {
-    describe('Exists check',  () => {
+    describe('Exists check', () => {
         let wrapper
+
         beforeEach(() => {
-            wrapper = shallowMount(List)
+            wrapper = mountComponent(List)
         })
+
         it("should component exists", () => {
             expect(wrapper.exists()).toBeTruthy()
         })
@@ -32,7 +35,7 @@ describe('List.vue', function () {
     describe("functionality check", () => {
         it('add button click functionality ', async () => {
             const addToListSpy = jest.spyOn(List.methods, 'addToList')
-            const wrapper = shallowMount(List)
+            const wrapper = mountComponent(List)
             const button = wrapper.find("#addButton")
             await button.trigger('click')
             expect(addToListSpy).toBeCalled()
@@ -54,7 +57,7 @@ describe('List.vue', function () {
                 }
             ]
             API.getItemList.mockResolvedValue(mockResponse)
-            const wrapper = shallowMount(List)
+            const wrapper = mountComponent(List)
             await flushPromises()
             const todoItem = wrapper.findAll('li')
             expect(todoItem).toHaveLength(mockResponse.length)
@@ -63,4 +66,44 @@ describe('List.vue', function () {
     })
 });
 
+function mountComponent() {
+    let actions;
+    let getters;
+    let state;
+
+    const localVue = createLocalVue();
+    localVue.use(Vuex);
+
+    state = {
+        todos: []
+    };
+    actions = {
+        addTodo: jest.fn(),
+        getTodos: jest.fn(),
+    };
+    getters = {
+        todos: () => [
+            {
+                "id": 1,
+                "text": "buy some cheese"
+            },
+            {
+                "id": 2,
+                "text": "go to gym"
+            },
+            {
+                "id": 3,
+                "text": "practice go"
+            }],
+    };
+
+    return mount(List, {
+        localVue,
+        store: new Vuex.Store({
+            state,
+            actions,
+            getters
+        })
+    });
+}
 

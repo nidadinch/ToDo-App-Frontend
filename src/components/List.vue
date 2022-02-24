@@ -3,38 +3,37 @@
     <input id="input" name="textbox" v-model:value="newToDo">
     <button class="add-button" id="addButton" @click="addToList()">Add</button>
     <ul class="todo-list">
-      <li class="todo-list-item"
-          v-for="item in items"
-      >{{ item }}
-      </li>
+      <ListItem
+          v-for="todo in todos"
+          :key="todo.id"
+          :todo="todo"
+      />
     </ul>
   </div>
 </template>
 
 <script>
 
-import API from "@/api";
-
+import ListItem from "@/components/ListItem";
+import {mapGetters} from "vuex";
 export default {
   name: 'List',
+  components: {ListItem},
   data() {
     return {
-      items: [],
       newToDo: ''
     }
   },
-  async created() {
-    try {
-      this.items = await API.getItemList()
-    } catch (e) {
-      console.error(e)
-    }
+  created() {
+     this.$store.dispatch('getTodos');
   },
-  async mounted() {
+  computed: {
+    ...mapGetters(["todos"])
   },
   methods: {
-    async addToList() {
-      await API.addTodoItem(this.newToDo)
+    addToList() {
+      this.$store.dispatch('addTodo', this.newToDo)
+      this.newToDo = ''
     }
   }
 }
