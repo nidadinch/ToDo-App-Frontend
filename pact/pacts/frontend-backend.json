@@ -41,6 +41,58 @@
           }
         }
       }
+    },
+    {
+      "description": "a request for adding todo list item",
+      "providerState": "add todo item successfully",
+      "request": {
+        "method": "POST",
+        "path": "/item",
+        "body": [
+          {
+            "text": "buy some milk"
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 1
+          },
+          "$.body[*].*": {
+            "match": "type"
+          },
+          "$.body[*].text": {
+            "match": "type"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "body": {
+          "data": [
+            {
+              "id": 1,
+              "text": "buy some milk"
+            }
+          ]
+        },
+        "matchingRules": {
+          "$.body.data": {
+            "min": 1
+          },
+          "$.body.data[*].*": {
+            "match": "type"
+          },
+          "$.body.data[*].id": {
+            "match": "type"
+          },
+          "$.body.data[*].text": {
+            "match": "type"
+          }
+        }
+      }
     }
   ],
   "metadata": {
