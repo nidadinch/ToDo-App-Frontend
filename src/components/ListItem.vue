@@ -1,6 +1,6 @@
 <template>
   <li>
-    {{todo.id}} . {{todo.text}}
+    {{todo.id}} . <span class="todo-list-item">{{todo.text}}</span>
   </li>
 </template>
 

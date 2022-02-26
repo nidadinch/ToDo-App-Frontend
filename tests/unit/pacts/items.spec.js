@@ -9,6 +9,7 @@ pactWith({
     describe('todolist items', () => {
         let api
         beforeEach(() => {
+            console.log(provider.mockService.baseUrl)
             api = new API(provider.mockService.baseUrl)
         })
 
