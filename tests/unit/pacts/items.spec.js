@@ -1,5 +1,5 @@
 import {pactWith} from 'jest-pact';
-import {like, eachLike, string} from "@pact-foundation/pact/src/dsl/matchers";
+import {like, string} from "@pact-foundation/pact/src/dsl/matchers";
 import {API} from "@/api";
 
 pactWith({
@@ -25,17 +25,15 @@ pactWith({
                     headers: {
                         'Content-Type': 'application/json; charset=UTF-8',
                     },
-                    body: {
-                        data: eachLike({
-                            id: like(1),
-                            text: string('buy some milk')
-                        })
-                    }
+                    body: [like({
+                        id: like(1),
+                        text: string('buy some milk')
+                    })]
                 }
             })
             const response = await api.getItemList()
-            expect(response.data[0].id).toEqual(1)
-            expect(response.data[0].text).toEqual('buy some milk')
+            expect(response[0].id).toEqual(1)
+            expect(response[0].text).toEqual('buy some milk')
 
         })
 
@@ -56,16 +54,14 @@ pactWith({
                         'Content-Type': 'application/json; charset=UTF-8',
                     },
                     body: {
-                        data: {
-                            id: like(1),
-                            text: string('buy some milk')
-                        }
+                        id: like(1),
+                        text: string('buy some milk')
                     }
                 }
             })
 
-            const response = await api.addTodoItem( "buy some milk")
-            expect(response.data.text).toEqual('buy some milk')
+            const response = await api.addTodoItem("buy some milk")
+            expect(response.text).toEqual('buy some milk')
 
         })
     })

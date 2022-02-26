@@ -18,25 +18,20 @@
         "headers": {
           "Content-Type": "application/json; charset=UTF-8"
         },
-        "body": {
-          "data": [
-            {
-              "id": 1,
-              "text": "buy some milk"
-            }
-          ]
-        },
+        "body": [
+          {
+            "id": 1,
+            "text": "buy some milk"
+          }
+        ],
         "matchingRules": {
-          "$.body.data": {
-            "min": 1
-          },
-          "$.body.data[*].*": {
+          "$.body[0]": {
             "match": "type"
           },
-          "$.body.data[*].id": {
+          "$.body[0].id": {
             "match": "type"
           },
-          "$.body.data[*].text": {
+          "$.body[0].text": {
             "match": "type"
           }
         }
@@ -63,16 +58,14 @@
           "Content-Type": "application/json; charset=UTF-8"
         },
         "body": {
-          "data": {
-            "id": 1,
-            "text": "buy some milk"
-          }
+          "id": 1,
+          "text": "buy some milk"
         },
         "matchingRules": {
-          "$.body.data.id": {
+          "$.body.id": {
             "match": "type"
           },
-          "$.body.data.text": {
+          "$.body.text": {
             "match": "type"
           }
         }
