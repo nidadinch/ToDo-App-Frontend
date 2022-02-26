@@ -26,8 +26,10 @@ export default new Vuex.Store({
             })
         },
         async addTodo({commit}, todoItem) {
-            await API.addTodoItem(todoItem).then(() => {
-                commit('addTodo', todoItem)
+            console.log("todoitem before request:", todoItem)
+            await API.addTodoItem(todoItem).then((todo) => {
+                console.log("todo from response:", todo)
+                commit('addTodo', todo)
             })
         }
     }

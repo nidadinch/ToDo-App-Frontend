@@ -22,11 +22,14 @@ export class API {
     }
 
     async getItemList() {
-        return axios.get(this.withPath('/items')).then(r => r.data)
+        return axios.get(('/items')).then(r => r.data)
     }
 
     async addTodoItem(todoItem) {
-        return axios.post(this.withPath('/item'), todoItem).then(r => r.data)
+        let todo = {
+            "text": todoItem
+        }
+        return axios.post(('/item'), todo).then(r => r.data)
     }
 }
 export default new API(process.env.VUE_APP_BASE_API_URL);

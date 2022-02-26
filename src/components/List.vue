@@ -32,6 +32,7 @@ export default {
   },
   methods: {
     addToList() {
+      console.log(this.newToDo)
       this.$store.dispatch('addTodo', this.newToDo)
       this.newToDo = ''
     }
