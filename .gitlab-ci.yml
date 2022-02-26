@@ -1,6 +1,7 @@
 stages:
   - test
   - build
+
 cache:
   key:
     files:
@@ -33,6 +34,6 @@ build:
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:latest"
   needs:
-    - build
+    - test
 
 
