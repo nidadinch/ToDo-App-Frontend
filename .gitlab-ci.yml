@@ -1,7 +1,6 @@
 stages:
   - test
   - build
-  - package
 cache:
   key:
     files:
@@ -14,24 +13,14 @@ test:
   stage: test
   script:
     - yarn install
+    - yarn run vue-cli-service test:unit
     - yarn build
-    - vue-cli-service test:unit
   artifacts:
     paths:
       - "dist"
 
 build:
-  image: node:lts-alpine
   stage: build
-  script:
-    - yarn install
-    - yarn build
-  artifacts:
-    paths:
-      - "dist"
-
-package:
-  stage: package
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
