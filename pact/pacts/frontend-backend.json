@@ -48,19 +48,11 @@
       "request": {
         "method": "POST",
         "path": "/item",
-        "body": [
-          {
-            "text": "buy some milk"
-          }
-        ],
+        "body": {
+          "text": "buy some milk"
+        },
         "matchingRules": {
-          "$.body": {
-            "min": 1
-          },
-          "$.body[*].*": {
-            "match": "type"
-          },
-          "$.body[*].text": {
+          "$.body.text": {
             "match": "type"
           }
         }
@@ -71,24 +63,16 @@
           "Content-Type": "application/json; charset=UTF-8"
         },
         "body": {
-          "data": [
-            {
-              "id": 1,
-              "text": "buy some milk"
-            }
-          ]
+          "data": {
+            "id": 1,
+            "text": "buy some milk"
+          }
         },
         "matchingRules": {
-          "$.body.data": {
-            "min": 1
-          },
-          "$.body.data[*].*": {
+          "$.body.data.id": {
             "match": "type"
           },
-          "$.body.data[*].id": {
-            "match": "type"
-          },
-          "$.body.data[*].text": {
+          "$.body.data.text": {
             "match": "type"
           }
         }

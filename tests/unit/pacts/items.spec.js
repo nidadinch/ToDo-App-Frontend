@@ -4,12 +4,11 @@ import {API} from "@/api";
 
 pactWith({
     consumer: 'FrontEnd',
-    provider: 'Backend'
+    provider: 'Backend',
 }, provider => {
     describe('todolist items', () => {
         let api
         beforeEach(() => {
-            console.log(provider.mockService.baseUrl)
             api = new API(provider.mockService.baseUrl)
         })
 
@@ -47,9 +46,9 @@ pactWith({
                 withRequest: {
                     method: 'POST',
                     path: '/item',
-                    body: eachLike({
+                    body: {
                         text: string('buy some milk')
-                    })
+                    }
                 },
                 willRespondWith: {
                     status: 200,
@@ -57,15 +56,16 @@ pactWith({
                         'Content-Type': 'application/json; charset=UTF-8',
                     },
                     body: {
-                        data: eachLike({
+                        data: {
                             id: like(1),
                             text: string('buy some milk')
-                        })
+                        }
                     }
                 }
             })
-            const response = await api.addTodoItem([{text : "buy some milk"}])
-            expect(response.data[0].text).toEqual('buy some milk')
+
+            const response = await api.addTodoItem( "buy some milk")
+            expect(response.data.text).toEqual('buy some milk')
 
         })
     })
