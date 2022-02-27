@@ -1,6 +1,7 @@
 stages:
   - test
   - build
+  - destroy
   - deploy
 cache:
   key:
