@@ -1,7 +1,7 @@
 stages:
   - test
   - build
-
+  - deploy
 cache:
   key:
     files:
@@ -36,4 +36,13 @@ build:
   needs:
     - test
 
-
+deploy:
+  stage: deploy
+  image: google/cloud-sdk
+  script:
+    - gcloud auth activate-service-account --key-file $GCLOUD_KEY_FILE
+    - gcloud config set project frontend-342617
+    - gcloud config set compute/zone us-central1-a
+    - gcloud container clusters create cluster-for-backend --num-nodes=3
+    - gcloud container clusters get-credentials cluster-for-backend
+    - kubectl apply -f backend-app.yaml
