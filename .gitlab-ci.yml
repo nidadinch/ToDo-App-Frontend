@@ -42,7 +42,7 @@ destroy:
   image: google/cloud-sdk
   script:
     - gcloud auth activate-service-account --key-file $GCLOUD_KEY_FILE
-    - gcloud container clusters delete cluster-for-frontend --zone us-central1-a --project frontend-342522 --quiet
+    - gcloud container clusters delete cluster-for-frontend --zone us-central1-a --project frontend-342617 --quiet
 
 deploy2test:
   stage: deploy2test
