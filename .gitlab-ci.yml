@@ -1,7 +1,6 @@
 stages:
   - test
   - build
-  - destroy
   - deploy
 cache:
   key:
@@ -36,13 +35,6 @@ build:
       --destination "${CI_REGISTRY_IMAGE}:latest"
   needs:
     - test
-
-destroy:
-  stage: destroy
-  image: google/cloud-sdk
-  script:
-    - gcloud auth activate-service-account --key-file $GCLOUD_KEY_FILE
-    - gcloud container clusters delete cluster-for-frontend --zone us-central1-a --project frontend-342522 --quiet
 
 deploy:
   stage: deploy
