@@ -56,5 +56,4 @@ deploy2test:
     - kubectl apply -f frontend-secret.yaml
     - kubectl apply -f frontend-deployment.yaml
     - kubectl apply -f frontend-service.yaml
-  needs:
-    - build
+
