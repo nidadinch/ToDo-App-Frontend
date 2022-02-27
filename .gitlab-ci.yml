@@ -1,7 +1,6 @@
 stages:
   - test
   - build
-  - destroy
   - deploy2test
 cache:
   key:
@@ -37,13 +36,6 @@ build:
   needs:
     - test
 
-destroy:
-  stage: destroy
-  image: google/cloud-sdk
-  script:
-    - gcloud auth activate-service-account --key-file $GCLOUD_KEY_FILE
-    - gcloud container clusters delete cluster-for-frontend --zone us-central1-a --project frontend-342617 --quiet
-
 deploy2test:
   stage: deploy2test
   image: google/cloud-sdk
@@ -51,9 +43,12 @@ deploy2test:
     - gcloud auth activate-service-account --key-file $GCLOUD_KEY_FILE
     - gcloud config set project frontend-342617
     - gcloud config set compute/zone us-central1-a
+    - gcloud container clusters delete cluster-for-frontend --zone us-central1-a --project frontend-342617 --quiet
     - gcloud container clusters create cluster-for-frontend --num-nodes=3
     - gcloud container clusters get-credentials cluster-for-frontend
     - kubectl apply -f frontend-secret.yaml
     - kubectl apply -f frontend-deployment.yaml
     - kubectl apply -f frontend-service.yaml
-
+    - kubectl apply -f frontend-ingress.yaml
+  needs:
+    - build
