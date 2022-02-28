@@ -116,12 +116,12 @@ Project has GitLab CI pipeline and it has several steps to get ready for deploym
 - Build & Test: Builds the project and runs all unit tests,
 - Dockerize: Generates a docker image to private gitlab registry
 - Deploy2Test: Configures Google Cloud Platform Kubernetes Engine. This step has 4 another configuration files named: 
-  frontend-deployment.yaml
-  frontend-ingress.yaml
-  frontend-secret.yaml
-  frontend-service.yaml
-For more information please check .gitlab-ci.yml file.
-Ingress has been used for assign a static ip to frontend. 
+  * frontend-deployment.yaml
+  * frontend-ingress.yaml
+  * frontend-secret.yaml
+  * frontend-service.yaml
+
+Ingress has been used for assign a static ip to frontend. For more information please check .gitlab-ci.yml file.
 
 This project contains a docker file that generates a docker image. For more information please check Dockerfile.
 
