@@ -50,5 +50,6 @@ deploy2test:
     - kubectl apply -f frontend-deployment.yaml
     - kubectl apply -f frontend-ingress.yaml
     - kubectl apply -f frontend-service.yaml
+    - kubectl get ingress
   needs:
     - build
