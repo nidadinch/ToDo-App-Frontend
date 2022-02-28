@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: frontend-ingress
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: "frontend-static-ip"
+    kubernetes.io/ingress.global-static-ip-name: "frontend-statstaticic-ip"
   labels:
     app: frontend
 spec:
