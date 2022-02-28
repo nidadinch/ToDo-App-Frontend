@@ -12,11 +12,56 @@ Feature: ToDo
     Then I should see "buy some milk" item in ToDo list
 ```
 
+## Table of contents
+
+- [Visuals](#visuals)
+- [Project Tree](#project-tree)
+- [Installation](#installation)
+    - [Install dependencies](#install-dependencies)
+    - [Run project](#run-project)
+    - [Run unit tests](#run-unit-tests)  
+    - [Run pact tests](#run-pact-tests)
+    - [Build](#build)
+- [Dependencies](#dependencies)
+- [Pipeline](#pipeline)
+- [Contributing](#contributing)
+- [License](#license)
+- [Links](#links)
+
 ## Visuals
+
 <img src="https://media.giphy.com/media/1dVaBaeKC4FgozwVpG/giphy.gif" width="600"  />
 
+## Project Tree 
+
+```
+├── pact/
+├── public/
+├── tests/unit/pacts
+│   └─ items.spec.js
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │ ├── __tests__
+│   │ │   ├── List.spec.js
+│   │ │   └── ListItem.spec.js
+│   │ ├── ListItem.vue
+│   │ └── List.vue 
+│   ├── router/
+│   ├── store/
+│   ├── views/
+│   │ ├── Home.vue
+│   │ └── __tests__
+│   │     └── Home.spec.js
+    ├── api.js
+│   └── ...
+├── package.json
+└── ...
+```
 
 ## Installation
+
+### Install Dependencies
 
 ```
 yarn install
@@ -28,31 +73,55 @@ or
 npm install
 ```
 
-## Usage
-
-To run project: 
+### Run project
 
 ```
 yarn serve
 ```
 
-To run unit tests: 
+### Run unit tests
 
 ```
 yarn run vue-cli-service test:unit
 ```
 
-To run pact tests: 
+### Run pact tests
 
 ```
 yarn run vue-cli-service test:unit pacts/
 ```
 
-To build: 
+### Build
 
 ```
 yarn build --mode test
 ```
+
+## Dependencies
+
+All dependencies can be found on package.json file. Also you can check the list:
+
+- [Axios](https://github.com/axios/axios)
+- [Vue](https://vuejs.org/guide/introduction.html)
+- [Vuex](https://vuex.vuejs.org) 
+- [Pact.js](https://github.com/pact-foundation/pact-js) 
+- [Jest](https://jestjs.io/docs/getting-started)
+- [Vue Router](https://router.vuejs.org/guide/) 
+
+## Pipeline
+
+Project has GitLab CI pipeline and it has several steps to get ready for deployment. 
+- Build & Test: Builds the project and runs all unit tests,
+- Dockerize: Generates a docker image to private gitlab registry
+- Deploy2Test: Configures Google Cloud Platform Kubernetes Engine. This step has 4 another configuration files named: 
+  frontend-deployment.yaml
+  frontend-ingress.yaml
+  frontend-secret.yaml
+  frontend-service.yaml
+For more information please check .gitlab-ci.yml file.
+Ingress has been used for assign a static ip to frontend. 
+
+This project contains a docker file that generates a docker image. For more information please check Dockerfile.
 
 ## Contributing
 
@@ -64,7 +133,6 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
@@ -72,4 +140,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 Nida Dinç - niddinc@gmail.com
+  
+
   
