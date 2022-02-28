@@ -110,6 +110,8 @@ All dependencies can be found on package.json file. Also you can check the list:
 
 ## Pipeline
 
+![Project-pipeline](/uploads/659238f8524dfd1a4ba70ec8b8783bac/Adsız-2022-02-28-2121.png)
+
 Project has GitLab CI pipeline and it has several steps to get ready for deployment. 
 - Build & Test: Builds the project and runs all unit tests,
 - Dockerize: Generates a docker image to private gitlab registry
